@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.8
 LABEL maintainer "Phizzl <the@phizzl.it>"
 
 RUN apk add --no-cache \
