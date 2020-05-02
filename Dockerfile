@@ -1,8 +1,8 @@
-FROM ubuntu:latest
+FROM alpine:latest
 LABEL maintainer "Phizzl <the@phizzl.it>"
 
-RUN apt-get update && \
-    apt-get -y install \
+RUN apk update install \
+        sudo \
         rsync \
         zip \
         unzip \
@@ -12,10 +12,7 @@ RUN apt-get update && \
         ca-certificates \
         software-properties-common \
         wget && \
-    useradd -m docker && echo "docker:docker" | chpasswd && \
-    adduser docker sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    apt-get clean
+    adduser -S docker && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER docker
-CMD /bin/bash
