@@ -3,12 +3,7 @@ LABEL maintainer "Phizzl <the@phizzl.it>"
 
 RUN apk add --no-cache \
         sudo \
-        rsync \
-        zip \
-        unzip \
-        curl \
-        ca-certificates \
-        wget && \
+        curl && \
     addgroup sudo && \
     adduser -S docker -G sudo && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/docker && \
