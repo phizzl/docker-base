@@ -3,6 +3,7 @@ LABEL maintainer "Phizzl <the@phizzl.it>"
 
 RUN apt-get update && \
     apt-get -y install \
+        sudo \
         curl \
         lsb-release && \
     useradd -m docker && echo "docker:docker" | chpasswd && \
