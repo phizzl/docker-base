@@ -1,17 +1,14 @@
-FROM alpine:3.8
+FROM ubuntu:xenial
 LABEL maintainer "Phizzl <the@phizzl.it>"
 
-RUN apk add --no-cache \
-        sudo \
-        rsync \
-        zip \
-        unzip \
+RUN apt-get update && \
+    apt-get -y install \
         curl \
-        ca-certificates \
-        wget && \
-    addgroup sudo && \
-    adduser -S docker -G sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/docker && \
-    echo "Set disable_coredump false" >> /etc/sudo.conf
+        lsb-release && \
+    useradd -m docker && echo "docker:docker" | chpasswd && \
+    adduser docker sudo && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    apt-get clean all
 
 USER docker
+CMD /bin/bash
